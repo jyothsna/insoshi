@@ -13,7 +13,8 @@ class Admin::ForumsController < ApplicationController
 
   def show
     @forum = Forum.find(params[:id])
-    @topics = @forum.topics.paginate(:page => params[:page])
+    @sections = @forum.sections.paginate(:page => params[:page]);
+#    @topics = @forum.topics.paginate(:page => params[:page])
     respond_to do |format|
       format.html { render :template => "forums/show"}
     end
@@ -21,7 +22,7 @@ class Admin::ForumsController < ApplicationController
 
   def new
     @forum = Forum.new
-
+    @forum.sections.build 
     respond_to do |format|
       format.html
     end
@@ -33,7 +34,6 @@ class Admin::ForumsController < ApplicationController
 
   def create
     @forum = Forum.new(params[:forum])
-
     respond_to do |format|
       if @forum.save
         flash[:notice] = 'Forum was successfully created.'
@@ -46,11 +46,10 @@ class Admin::ForumsController < ApplicationController
 
   def update
     @forum = Forum.find(params[:id])
-
     respond_to do |format|
       if @forum.update_attributes(params[:forum])
         flash[:notice] = 'Forum was successfully updated.'
-        format.html { redirect_to(@forum) }
+        format.html { redirect_to(admin_forums_url) }
       else
         format.html { render :action => "edit" }
       end
@@ -60,7 +59,6 @@ class Admin::ForumsController < ApplicationController
   def destroy
     @forum = Forum.find(params[:id])
     @forum.destroy
-
     respond_to do |format|
       flash[:success] = 'Forum was successfully destroyed.'
       format.html { redirect_to(admin_forums_url) }

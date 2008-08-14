@@ -18,7 +18,8 @@ class Topic < ActiveRecord::Base
   MAX_NAME = 100
   NUM_RECENT = 6
   
-  belongs_to :forum, :counter_cache => true
+  belongs_to :section, :counter_cache => true
+  has_one :forum, :through => :section
   belongs_to :person
   has_many :posts, :order => :created_at, :dependent => :destroy,
                    :class_name => "ForumPost"

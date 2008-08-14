@@ -1,4 +1,3 @@
-test
 <li class="topic">
   <a name="topic_<%= topic.id %>"></a>
   <div class="profile-image">
@@ -6,18 +5,18 @@ test
     <%= image_tag "icons/new.gif", :class => "icon", :alt => "Topic" %>
   </div>
   <p>
-  <%- n = topic.posts.count -%>
-  <%= link_to h(topic.name), 
-              forum_topic_path(topic.forum, topic, :posts => n),
-              :class => "show-follow" %>
+    <%- n = topic.posts.count -%>
+    <%= link_to h(topic.name), 
+      forum_topic_path(topic.section.forum, topic, :posts => n),
+      :class => "show-follow" %>
   <span class="meta">(<%= pluralize(n, "post") %>)</span>
   </p>
   <p class="meta">
     Created by <%= person_link topic.person %>
     <%= time_ago_in_words(topic.created_at) %> ago
     <%- if admin? -%>
-      | <%= link_to "Edit",  edit_forum_topic_path(topic.forum, topic) %>
-      | <%= link_to "Destroy",  forum_topic_path(topic.forum, topic),
+      | <%= link_to "Edit",  edit_forum_topic_path(topic.section.forum, topic) %>
+      | <%= link_to "Destroy",  forum_topic_path(topic.section.forum, topic),
                                 :confirm => 'Are you sure?',
                                 :method  => :delete %>
     <%- end -%>

@@ -22,6 +22,8 @@ class ApplicationController < ActionController::Base
         redirect_to home_url
       end
     end
+    
+    
   
     # Create a Scribd-style PageView.
     # See http://www.scribd.com/doc/49575/Scaling-Rails-Presentation

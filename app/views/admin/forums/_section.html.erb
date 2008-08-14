@@ -1,0 +1,14 @@
+<div class="section">
+  <% fields_for "forum[section_attributes][]", section do |section_form| %>
+    <p>
+    <b> Section </b> <%= section_form.text_field :name, :index => nil  %> 
+    <% if section.new_record? %>
+      <%= link_to_function "remove", "$(this).up('.section').remove()" %>
+    <% else %>
+      <%= link_to_function "remove", "mark_for_destroy(this)" %>
+      <%= section_form.hidden_field :id, :index => nil %>
+      <%= section_form.hidden_field :should_destroy, :index => nil, :class => 'should_destroy' %>
+    <% end %> 
+    </p>
+  <% end %>
+</div>

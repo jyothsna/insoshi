@@ -1,20 +1,18 @@
 <h1>Editing forum</h1>
 
 <%= error_messages_for :forum %>
-
-<% form_for(@forum) do |f| %>
+ 
+<% form_for [:admin, @forum], :url => { :action => "update" }  do |f| %>
   <p>
-    <b>Name</b><br />
-    <%= f.text_field :name %>
+  <%= render :partial => 'fields', :locals => { :f => f } %>
+  </p>
+  <p>
+  <b>Description</b><br />
+  <%= f.text_area :description %>
   </p>
 
   <p>
-    <b>Description</b><br />
-    <%= f.text_area :description %>
-  </p>
-  
-  <p>
-    <%= f.submit "Update" %>
+  <%= f.submit "Update" %>
   </p>
 <% end %>
 

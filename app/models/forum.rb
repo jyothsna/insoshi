@@ -12,12 +12,43 @@
 #
 
 class Forum < ActiveRecord::Base
-  attr_accessible :name, :description
+  attr_accessible :name, :description, :section_attributes, :id
 
-  has_many :topics, :order => "created_at DESC", :dependent => :destroy
-  has_many :posts, :through => :topics
-
-  
   validates_length_of :name, :maximum => 255, :allow_nil => true
   validates_length_of :description, :maximum => 1000, :allow_nil => true
-end
+#  validates_associated :sections
+
+  has_many :sections
+  has_many :topics, :through => :sections
+  has_many :posts, :through => :topics
+  after_update :save_sections 
+  after_destroy :delete_sections
+
+  def section_attributes=(section_attributes)
+    section_attributes.each do |attributes|
+      if attributes[:id].blank?
+        sections.build(attributes)
+      else 
+        section = sections.detect { |s| s.id == attributes[:id].to_i } 
+        section.attributes = attributes 
+      end
+    end
+  end
+
+  def save_sections
+    sections.each do |s|
+      if s.should_destroy?
+        s.destroy
+      else
+        s.save(false)
+      end
+    end
+  end
+  
+  def delete_sections
+      sections.each do |s|
+          s.destroy
+      end
+  end
+  
+end 

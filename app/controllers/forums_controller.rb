@@ -15,7 +15,10 @@ class ForumsController < ApplicationController
 
   def show
     @forum = Forum.find(params[:id])
-    @topics = @forum.topics.paginate(:page => params[:page])
+    @sections = @forum.sections.find_all_by_forum_id(params[:id])
+ 
+ #   @sections = @forum.sections.paginate(:page => params[:page])
+#    @topics = @forum.topics.paginate(:page => params[:page])
   end
   
   private

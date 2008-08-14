@@ -74,6 +74,7 @@ module ActivitiesHelper
       %(#{person_link(person)} and #{person_link(activity.item.contact)}
         have connected.)
     when "ForumPost"
+      debugger
       topic = activity.item.topic
       # TODO: deep link this to the post
       %(#{person_link(person)} made a #{topic_link("forum post", topic)}.)

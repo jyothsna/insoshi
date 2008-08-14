@@ -1,0 +1,12 @@
+<% error_messages_for :forum %>
+<p>
+<b>Name</b><br />
+<%= f.text_field :name %>
+</p>
+<div id="sections">
+  <%= render :partial => 'section', :collection => @forum.sections %>
+</div>
+<p>
+<%= add_section_link "Add a section" %>
+</p>
+
