@@ -6,9 +6,9 @@
   </div>
   <p>
     <%- n = topic.posts.count -%>
-    <%= link_to h(topic.name), 
-      forum_topic_path(topic.section.forum, topic, :posts => n),
-      :class => "show-follow" %>
+    <%- debugger %>
+    <%- fp = forum_path(topic.forum_id, topic, :posts => n) %>
+    <%= link_to h(topic.name), fp, :class => "show-follow" %>
   <span class="meta">(<%= pluralize(n, "post") %>)</span>
   </p>
   <p class="meta">

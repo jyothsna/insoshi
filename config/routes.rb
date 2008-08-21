@@ -34,8 +34,10 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resources :forums do |forums|
-    forums.resources :topics do |topic|
-      topic.resources :posts
+    forums.resources :sections do |sections|
+      sections.resources :topics do |topic|
+        topic.resources :posts
+      end
     end
   end
   

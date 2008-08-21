@@ -37,7 +37,8 @@ module ActivitiesHelper
         #{topic_link(activity.item)}.)
     when "Photo"
       %(#{person_link(person)}'s profile picture has changed.)
-    when "Person"
+    
+    debuggerwhen "Person"
       %(#{person_link(person)}'s description has changed.)
     else
       # TODO: make this a more graceful falure (?).
@@ -74,9 +75,9 @@ module ActivitiesHelper
       %(#{person_link(person)} and #{person_link(activity.item.contact)}
         have connected.)
     when "ForumPost"
-      debugger
       topic = activity.item.topic
       # TODO: deep link this to the post
+
       %(#{person_link(person)} made a #{topic_link("forum post", topic)}.)
     when "Topic"
       %(#{person_link(person)} created a 
@@ -140,9 +141,10 @@ module ActivitiesHelper
   def topic_link(text, topic = nil)
     if topic.nil?
       topic = text
-      text = topic.name
+      text = topic.section.name
     end
-    link_to(text, forum_topic_path(topic.forum, topic))
+    debugger
+    link_to(text, forum_section_topic_path(topic.section.forum, topic))
   end
 
   # Return a link to the wall.

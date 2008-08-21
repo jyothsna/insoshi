@@ -178,7 +178,7 @@ class PostsController < ApplicationController
         # will display the link as 'followed' when he makes a post,
         # so the link color will only change back to 'unfollowed' 
         # if someone *else* makes a post.
-        forum_topic_url(@forum, @topic, :posts => @topic.posts.count)
+        forum_section_topic_url(@forum, @topic, :posts => @topic.posts.count)
       elsif blog?
         blog_post_url(@blog, @post)
       end
@@ -187,7 +187,7 @@ class PostsController < ApplicationController
     # Return the URL for the resource posts (forum topic or blog).
     def posts_url
       if forum?
-       forum_topic_url(@forum, @topic)
+       forum_section_topic_url(@forum, @topic)
       elsif blog?
         blog_url(@blog)
       end      
